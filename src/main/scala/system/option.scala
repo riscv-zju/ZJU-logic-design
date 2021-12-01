@@ -31,8 +31,6 @@ class Logic101Options private[stage] (val topModule: Option[Class[_ <: Any]] = N
       Some(classNames.mkString("_"))
     case _ => None
   }
-
-  lazy val longName: Option[String] = if (!topPackage.isEmpty) Some(s"${topPackage.get}.${configClass.get}") else None
 }
 
 
@@ -54,5 +52,4 @@ object ElaborationArtefacts {
     fw.close
     f
   }
-
 }

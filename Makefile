@@ -5,9 +5,10 @@ CHISEL_OUT	:= $(BUILD)/chisel
 VIVADO_OUT	:= $(BUILD)/vivado
 
 LAB 		?= 4
-PACKAGE		?= logic.system.lab$(LAB)
-CONFIG		?= LampCtrlDelayTarget
 TOP_MODULE	?= FPGAWrapper
+PACKAGE		?= logic.lab._$(LAB)
+CONFIG		?= LampCtrlDelayTarget
+
 
 
 all: compile sythesis
@@ -18,7 +19,7 @@ compile_help:
 compile:
 	mkdir -p $(CHISEL_OUT)/LAB$(LAB)
 	sbt "runMain logic.system.Generator \
-			-T $(PACKAGE).$(TOP_MODULE) \
+			-T logic.lab.$(TOP_MODULE) \
 			-C $(PACKAGE).$(CONFIG) 	\
 			-td $(CHISEL_OUT)/LAB$(LAB)"
 
