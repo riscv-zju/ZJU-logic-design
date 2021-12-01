@@ -1,11 +1,11 @@
-package logic.system
+package logic101.system
 
 import chisel3.stage.{ChiselCli, ChiselStage}
 import firrtl.AnnotationSeq
 import firrtl.options.PhaseManager.PhaseDependency
 import firrtl.options.{Dependency, Phase, PhaseManager, PreservesAll, Shell, Stage, StageMain}
 import firrtl.stage.FirrtlCli
-import logic.system.stage._
+import logic101.system.stage._
 
 package object stage {
     import firrtl.AnnotationSeq
@@ -27,8 +27,8 @@ class Logic101Stage extends Stage {
 
   override val shell = new Shell("logic101") with Logic101Cli with ChiselCli with FirrtlCli
   val targets: Seq[PhaseDependency] = Seq(
-    Dependency[logic.system.stage.phases.Checks],
-    Dependency[logic.system.stage.phases.PreElaboration],
+    Dependency[logic101.system.stage.phases.Checks],
+    Dependency[logic101.system.stage.phases.PreElaboration],
     Dependency[chisel3.stage.phases.Checks],
     Dependency[chisel3.stage.phases.Elaborate],
     Dependency[chisel3.stage.phases.AddImplicitOutputFile],
@@ -36,7 +36,7 @@ class Logic101Stage extends Stage {
     Dependency[chisel3.stage.phases.MaybeAspectPhase],
     Dependency[chisel3.stage.phases.Convert],
     Dependency[firrtl.stage.phases.Compiler],
-    Dependency[logic.system.stage.phases.GenerateArtefacts]
+    Dependency[logic101.system.stage.phases.GenerateArtefacts]
   )
 
   private val pm = new PhaseManager(targets)

@@ -3,7 +3,7 @@
 package gcd
 
 import chisel3._
-import logic.system.config._
+import logic101.system.config._
 /**
   * Compute GCD using subtraction method.
   * Subtracts the smaller from the larger until register y is zero.

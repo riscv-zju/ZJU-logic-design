@@ -1,9 +1,9 @@
-package logic.fpga
+package logic101.fpga
 
 import chisel3._
 import chisel3.experimental.{DataMirror, IO}
 
-import logic.system.config._
+import logic101.system.config._
 
 case class IOPin(element: Element, index: Int = 0) {
   private val width = DataMirror.widthOf(element)

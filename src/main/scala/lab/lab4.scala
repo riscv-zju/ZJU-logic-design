@@ -1,11 +1,11 @@
-package logic.lab._4
+package logic101.lab._4
 
 import chisel3._
 import chisel3.util._
-import logic.lab._
-import logic.fpga._
-import logic.system.stage._
-import logic.system.config._
+import logic101.lab._
+import logic101.fpga._
+import logic101.system.stage._
+import logic101.system.config._
 
 class LampCtrlTarget extends Config((site, here, up) => {
   case TargetKey => (p: Parameters) => new LampCtrl()(p) //"LampCtrl"

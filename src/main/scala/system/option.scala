@@ -1,4 +1,4 @@
-package logic.system.stage
+package logic101.system.stage
 
 import firrtl.options.Shell
 import java.io.{File, FileWriter}

@@ -1,4 +1,4 @@
-package logic.system.stage.phases
+package logic101.system.stage.phases
 
 import firrtl.AnnotationSeq
 import firrtl.options.Viewer.view
@@ -12,8 +12,8 @@ import java.io.{File, FileWriter}
 import chisel3.RawModule
 import chisel3.stage.ChiselGeneratorAnnotation
 import chisel3.stage.ChiselOutputFileAnnotation
-import logic.system.config.{Config, Field, Parameters}
-import logic.system.stage._
+import logic101.system.config.{Config, Field, Parameters}
+import logic101.system.stage._
 
 /** Checks for the correct type and number of command line arguments */
 class Checks extends Phase {

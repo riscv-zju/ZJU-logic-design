@@ -6,7 +6,7 @@ VIVADO_OUT	:= $(BUILD)/vivado
 
 LAB 		?= 4
 TOP_MODULE	?= FPGAWrapper
-PACKAGE		?= logic.lab._$(LAB)
+PACKAGE		?= logic101.lab._$(LAB)
 CONFIG		?= LampCtrlDelayTarget
 
 
@@ -14,12 +14,12 @@ CONFIG		?= LampCtrlDelayTarget
 all: compile sythesis
 
 compile_help:
-	sbt "runMain logic.system.Generator --help"
+	sbt "runMain logic101.system.Generator --help"
 
 compile:
 	mkdir -p $(CHISEL_OUT)/LAB$(LAB)
-	sbt "runMain logic.system.Generator \
-			-T logic.lab.$(TOP_MODULE) \
+	sbt "runMain logic101.system.Generator \
+			-T logic101.lab.$(TOP_MODULE) \
 			-C $(PACKAGE).$(CONFIG) 	\
 			-td $(CHISEL_OUT)/LAB$(LAB)"
 

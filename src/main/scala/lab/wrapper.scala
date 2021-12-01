@@ -1,10 +1,10 @@
-package logic.lab
+package logic101.lab
 
 import chisel3._
 import chisel3.util._
-import logic.fpga._
-import logic.system.stage._
-import logic.system.config._
+import logic101.fpga._
+import logic101.system.stage._
+import logic101.system.config._
 
 class FPGAWrapper(implicit p: Parameters) extends Nexys4Shell {
 
@@ -20,5 +20,4 @@ class FPGAWrapper(implicit p: Parameters) extends Nexys4Shell {
       pin.suggestName(io_pin.name)
       pin <> port
     } }
-
 }

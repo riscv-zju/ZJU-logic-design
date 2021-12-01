@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logic.system
+package logic101.system
 
 object config {
   abstract class Field[T] private (val default: Option[T])

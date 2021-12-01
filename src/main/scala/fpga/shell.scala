@@ -1,8 +1,8 @@
-package logic.fpga
+package logic101.fpga
 
 import chisel3._
-import logic.system.stage._
-import logic.system.config._
+import logic101.system.stage._
+import logic101.system.config._
 
 
 class XDC(val name: String) {
