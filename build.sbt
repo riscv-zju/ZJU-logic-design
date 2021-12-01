@@ -17,6 +17,7 @@ lazy val root = (project in file("."))
       "-deprecation",
       "-feature",
       "-Xcheckinit",
+      "-language:existentials",
       // Enables autoclonetype2 in 3.4.x (on by default in 3.5)
       "-P:chiselplugin:useBundlePlugin"
     ),
