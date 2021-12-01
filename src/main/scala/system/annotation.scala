@@ -31,16 +31,3 @@ private[stage] object ConfigsAnnotation extends HasShellOptions {
     )
   )
 }
-
-/** Optional base name for generated files' filenames */
-case class OutputBaseNameAnnotation(outputBaseName: String) extends NoTargetAnnotation with Logic101Option
-private[stage] object OutputBaseNameAnnotation extends HasShellOptions {
-  override val options = Seq(
-    new ShellOption[String](
-      longOption = "name",
-      toAnnotationSeq = a => Seq(OutputBaseNameAnnotation(a)),
-      helpText = "<base name of output files>",
-      shortOption = Some("n")
-    )
-  )
-}

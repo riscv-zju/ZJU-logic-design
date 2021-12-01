@@ -18,7 +18,6 @@ package object stage {
             x match {
             case TopModuleAnnotation(a)         => c.copy(topModule = Some(a))
             case ConfigsAnnotation(a)           => c.copy(configNames = Some(a))
-            case OutputBaseNameAnnotation(a)    => c.copy(outputBaseName = Some(a))
             }
         }
   }
@@ -29,7 +28,6 @@ class Logic101Stage extends Stage {
   override val shell = new Shell("logic101") with Logic101Cli with ChiselCli with FirrtlCli
   val targets: Seq[PhaseDependency] = Seq(
     Dependency[logic.system.stage.phases.Checks],
-    Dependency[logic.system.stage.phases.TransformAnnotations],
     Dependency[logic.system.stage.phases.PreElaboration],
     Dependency[chisel3.stage.phases.Checks],
     Dependency[chisel3.stage.phases.Elaborate],
@@ -37,7 +35,8 @@ class Logic101Stage extends Stage {
     Dependency[chisel3.stage.phases.AddImplicitOutputAnnotationFile],
     Dependency[chisel3.stage.phases.MaybeAspectPhase],
     Dependency[chisel3.stage.phases.Convert],
-    Dependency[firrtl.stage.phases.Compiler]
+    Dependency[firrtl.stage.phases.Compiler],
+    Dependency[logic.system.stage.phases.GenerateArtefacts]
   )
 
   private val pm = new PhaseManager(targets)

@@ -26,7 +26,6 @@ class Checks extends Phase {
       case a: TargetDirAnnotation      => a +=: targetDir
       case a: TopModuleAnnotation      => a +=: topModule
       case a: ConfigsAnnotation        => a +=: configNames
-      case a: OutputBaseNameAnnotation => a +=: outputBaseName
       case _ =>
     }
 
@@ -95,14 +94,19 @@ class PreElaboration extends Phase {
 }
 
 
-class TransformAnnotations extends Phase {
+class GenerateArtefacts extends Phase {
 
-  override val prerequisites = Seq(Dependency[Checks])
-  override val dependents = Seq(Dependency[chisel3.stage.phases.AddImplicitOutputFile])
+  override val prerequisites = Seq(Dependency[firrtl.stage.phases.Compiler])
   override def invalidates(a: Phase) = false
 
   override def transform(annotations: AnnotationSeq): AnnotationSeq = {
-    /** Construct output file annotation for emission */
-    new ChiselOutputFileAnnotation(view[Logic101Options](annotations).longName.get) +: annotations
+    val targetDir = view[StageOptions](annotations).targetDir
+
+    ElaborationArtefacts.files.foreach { case (extension, contents) =>
+      ElaborationArtefacts.writeOutputFile(targetDir, s"${extension}", contents ())
+    }
+
+    annotations
   }
+
 }
