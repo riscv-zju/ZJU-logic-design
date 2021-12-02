@@ -8,8 +8,11 @@ import logic101.system.stage._
 import logic101.system.config._
 
 class LampCtrlTarget extends Config((site, here, up) => {
-  case TargetKey => (p: Parameters) => new LampCtrl()(p) //"LampCtrl"
-  case PinKey => (dut: LampCtrlIO) => Seq(("J15", dut.S1), ("L16", dut.S2), ("M13", dut.S3), ("H17", dut.F))
+  case TargetKey => (p: Parameters) => new LampCtrl()(p)
+  case PinKey => (dut: LampCtrlIO) => Seq((Nexys4Pin.SW(0), dut.S1), 
+                                          (Nexys4Pin.SW(1), dut.S2), 
+                                          (Nexys4Pin.SW(2), dut.S3), 
+                                          (Nexys4Pin.LED(0), dut.F))
 })
 
 class LampCtrlDelayTarget extends Config(

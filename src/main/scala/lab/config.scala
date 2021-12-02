@@ -8,6 +8,6 @@ import logic101.system.config._
 
 // case object TargetKey extends Field[String]()
 case object TargetKey extends Field[Parameters => Module]()
-case object PinKey extends Field[Bundle => Seq[Tuple2[String, Element]]]()
+case object PinKey extends Field[Bundle => Seq[Tuple2[Tuple2[String, String], Element]]]()
 
 

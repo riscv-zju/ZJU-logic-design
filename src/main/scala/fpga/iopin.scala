@@ -34,7 +34,7 @@ case class IOPin(element: Element, index: Int = 0) {
       case Output => true
       case Input => false
       case Bidirectional(_) => true
-      case Unspecified => { require(false); false }
+      // case Unspecified => { require(false); false }
       case _ => false
     }
   }
@@ -45,7 +45,7 @@ case class IOPin(element: Element, index: Int = 0) {
       case Output => false
       case Input => true
       case Bidirectional(_) => true
-      case Unspecified => { require(false); false }
+      // case Unspecified => { require(false); false }
       case _ => false
     }
   }

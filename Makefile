@@ -4,10 +4,10 @@ SCRIPT		:= $(TOP)/scripts
 CHISEL_OUT	:= $(BUILD)/chisel
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 4
+LAB 		?= 5
 TOP_MODULE	?= FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
-CONFIG		?= LampCtrlDelayTarget
+CONFIG		?= LampCtrlTarget
 
 
 
