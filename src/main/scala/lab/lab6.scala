@@ -15,8 +15,8 @@ class DecodeTestTarget extends Config((site, here, up) => {
         Seq((SW(0), dut.SW(0)), (SW(1), dut.SW(1)), (SW(2), dut.SW(2)), (SW(3), dut.SW(3)), 
             (SW(4), dut.SW(4)), (SW(5), dut.SW(5)), (SW(6), dut.SW(6)), (SW(7), dut.SW(7)), 
             (SW(14), dut.SW(8)), (SW(15), dut.SW(9)), 
-            (Seg("P"), dut.Seg(0)), (Seg("G"), dut.Seg(1)), (Seg("F"), dut.Seg(2)), (Seg("E"), dut.Seg(3)), 
-            (Seg("D"), dut.Seg(4)), (Seg("C"), dut.Seg(5)), (Seg("B"), dut.Seg(6)), (Seg("A"), dut.Seg(7)), 
+            (SEG("P"), dut.SEG(0)), (SEG("G"), dut.SEG(1)), (SEG("F"), dut.SEG(2)), (SEG("E"), dut.SEG(3)), 
+            (SEG("D"), dut.SEG(4)), (SEG("C"), dut.SEG(5)), (SEG("B"), dut.SEG(6)), (SEG("A"), dut.SEG(7)), 
             (AN(0), dut.AN(0)), (AN(1), dut.AN(1)), (AN(2), dut.AN(2)), (AN(3), dut.AN(3)), 
       ) }
 })
@@ -76,7 +76,7 @@ class MC14495 extends Module {
 
 class DispNumberIO extends Bundle {
   val SW = Input(Vec(10, Bool()))
-  val Seg = Output(Vec(8, Bool()))
+  val SEG = Output(Vec(8, Bool()))
   val AN = Output(Vec(4, Bool()))
 }
 
@@ -89,5 +89,5 @@ class DispNumber(implicit p: Parameters) extends Module {
   my_mc14495.io.point := io.SW(8)
   my_mc14495.io.LE := io.SW(9)
 
-  io.Seg := my_mc14495.io.cathode.asTypeOf(io.Seg)
+  io.SEG := my_mc14495.io.cathode.asTypeOf(io.SEG)
 }
