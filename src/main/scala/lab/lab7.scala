@@ -14,8 +14,8 @@ class TopTarget extends Config((site, here, up) => {
       { import logic101.fpga.Nexys4Pin._
         Seq((SW(0), dut.SW(0)), (SW(1), dut.SW(1)), (SW(2), dut.SW(2)), (SW(3), dut.SW(3)), 
             (SW(4), dut.SW(4)), (SW(5), dut.SW(5)), (SW(6), dut.SW(6)), (SW(7), dut.SW(7)), 
-            (BTN("LEFT"), dut.BTN(0)),  (BTN("UP"), dut.BTN(1)), 
-            (BTN("RIGHT"), dut.BTN(2)), (BTN("DOWN"), dut.BTN(3)),
+            (BTN("LEFT"), dut.BTN(3)),  (BTN("UP"), dut.BTN(2)), 
+            (BTN("RIGHT"), dut.BTN(1)), (BTN("DOWN"), dut.BTN(0)),
             (SEG("P"), dut.SEG(0)), (SEG("G"), dut.SEG(1)), (SEG("F"), dut.SEG(2)), (SEG("E"), dut.SEG(3)), 
             (SEG("D"), dut.SEG(4)), (SEG("C"), dut.SEG(5)), (SEG("B"), dut.SEG(6)), (SEG("A"), dut.SEG(7)), 
             (AN(0), dut.AN(0)), (AN(1), dut.AN(1)), (AN(2), dut.AN(2)), (AN(3), dut.AN(3)), 
@@ -38,7 +38,7 @@ class DispNum extends Module {
   my_mc14495.io.data := 0.U
   my_mc14495.io.LE := false.B
   my_mc14495.io.point := true.B
-  switch (clkdiv(26, 25)) {
+  switch (clkdiv(18, 17)) {
     is ("b00".U) { 
       io.AN := "b1110".U
       my_mc14495.io.data := io.hexs(3, 0)

@@ -4,7 +4,7 @@ SCRIPT		:= $(TOP)/scripts
 CHISEL_OUT	:= $(BUILD)/chisel
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 7
+LAB 		?= 8
 TOP_MODULE	?= FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
 CONFIG		?= TopTarget
