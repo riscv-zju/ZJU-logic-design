@@ -47,7 +47,7 @@ class XDC(val name: String) {
 }
 
 abstract class BasicShell()(implicit p: Parameters) extends RawModule {
-  val xdc = new XDC("shell.xdc")
+  val xdc = new XDC("ios.xdc")
 
   ElaborationArtefacts.add("shell.vivado.tcl",
     """set shell_vivado_tcl [file normalize [info script]]

@@ -4,10 +4,11 @@ SCRIPT		:= $(TOP)/scripts
 CHISEL_OUT	:= $(BUILD)/chisel
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 8
-TOP_MODULE	?= FPGAWrapper
+LAB 		?= 11
+TOP_MODULE	?= NexysA7FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
-CONFIG		?= TopTarget
+CONFIG		?= cnt16bTarget
+
 
 
 
@@ -19,7 +20,7 @@ compile_help:
 compile:
 	mkdir -p $(CHISEL_OUT)/LAB$(LAB)
 	sbt "runMain logic101.system.Generator \
-			-T logic101.lab.$(TOP_MODULE) \
+			-T logic101.fpga.$(TOP_MODULE) \
 			-C $(PACKAGE).$(CONFIG) 	\
 			-td $(CHISEL_OUT)/LAB$(LAB)"
 

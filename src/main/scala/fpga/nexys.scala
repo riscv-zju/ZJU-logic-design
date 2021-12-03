@@ -4,7 +4,7 @@ import chisel3._
 import logic101.system.stage._
 import logic101.system.config._
 
-class Nexys4Shell(implicit p: Parameters) extends BasicShell {
+class NexysShell(implicit p: Parameters) extends BasicShell {
 
   val clk = IO(Input(Clock()))
   val rstn = IO(Input(Bool()))
