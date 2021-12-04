@@ -15,10 +15,15 @@ You can select your target lab and task by using `LAB` and `CONFIG` variables.
 make LAB=4 CONFIG=LampCtrlTarget
 ```
 
-
 ## How to Sythesis
 You need to create the vivado project manually and add the files generated under `build` directory to the project.
 We will provide synthesis scripts in the future.
+
+
+## How to Simulation
+Chisel test is not a best choice, I recommend you use iverilog, vivado and other EDA to simulate your design.
+We will provide testbench in the future.
+
 
 ## *In the End*
 Using chisel to complete labs will lose some gate-level details, and I do not recommend you use the content of this repository directly, so I do not provide a submittable implementation (although porting to the SWORD board is easy).

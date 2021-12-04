@@ -24,7 +24,7 @@ class NexysA7FPGAWrapper(implicit p: Parameters) extends NexysShell {
     val dut_port = IOPin(pin)
     xdc.addPackagePin(dut_port, cons)
     xdc.addIOStandard(dut_port, "LVCMOS33")
-    xdc.addIOB(dut_port)
+    // xdc.addIOB(dut_port)
   } }
 
   dontTouch(dut.io)

@@ -1,13 +1,13 @@
 TOP			:= $(CURDIR)
 BUILD		:= $(TOP)/build
 SCRIPT		:= $(TOP)/scripts
-CHISEL_OUT	:= $(BUILD)/chisel
+CHISEL_OUT	:= $(BUILD)/logic101
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 12
+LAB 		?= 13
 TOP_MODULE	?= NexysA7FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
-CONFIG		?= Task3Target
+CONFIG		?= SEGTarget
 
 all: compile sythesis
 
@@ -22,7 +22,8 @@ compile:
 			-td $(CHISEL_OUT)/LAB$(LAB)"
 
 sythesis:
-	@echo "Now add the verilog and tcl files under \`build/LAB$(LAB)\` to your vivado project :P"
+	@echo ; echo
+	@echo "[✔️] Now add the verilog and tcl files under \`build/logic101/LAB$(LAB)\` to your vivado project"
 
 clean:
 	rm -rf build target project/target *.v *.anno.json
