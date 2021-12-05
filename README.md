@@ -1,4 +1,4 @@
-![logo](./scripts/logic101.png)
+![logo](./img/logic101.png)
 Digital Logic Design 101 [Chisel Version]
 =======================
 This repository contains a chisel version of the laboratory of the Zhejiang University Computer and Logic Design Fundamentals course.
@@ -15,13 +15,24 @@ You can select your target lab and task by using `LAB` and `CONFIG` variables.
 make LAB=4 CONFIG=LampCtrlTarget
 ```
 
+Labs List:
+- Lab4: LampCtrlTarget, LampCtrlDelayTarget
+- Lab5: DecodeTestTarget, LampCtrlTarget
+- Lab6: DecodeTestTarget
+- Lab7: TopTarget
+- Lab8: TopTarget
+- Lab11: cnt4bTarget, cnt16bTarget
+- Lab12: Task1Target, Task2Target, Task3Target
+- Lab13: LEDTarget, SEGTarget
+- Lab14: ClockTarget
+
 ## How to Sythesis
 You need to create the vivado project manually and add the files generated under `build` directory to the project.
 We will provide synthesis scripts in the future.
 
 
 ## How to Simulation
-Using chisel-test is not a good choice, I recommend you use [iverilog](https://command-not-found.com/iverilog), vivado and other EDA(e.g. synopsys vcs) to simulate your design.
+Using chisel-test is not a good choice, I recommend you use [iverilog](https://command-not-found.com/iverilog), vivado and other EDA (e.g. synopsys vcs) to simulate your design.
 We will provide testbench in the future.
 
 
@@ -30,4 +41,8 @@ Using chisel to complete labs will lose some gate-level details, and I do not re
 
 I hope these examples will help you get started with chisel. 
 
-For students interested in computer architecture in class, feel free to contact me.
+For **students** interested in computer architecture **in the class**, feel free to contact me.
+
+<p align="center">
+  <img width="200" src="./img/1.0.jpg">
+</p>

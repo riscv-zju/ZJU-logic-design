@@ -4,10 +4,10 @@ SCRIPT		:= $(TOP)/scripts
 CHISEL_OUT	:= $(BUILD)/logic101
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 14
+LAB 		?= 0
 TOP_MODULE	?= NexysA7FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
-CONFIG		?= ClockTarget
+CONFIG		?= EmptyTarget
 
 all: compile sythesis
 
@@ -23,7 +23,7 @@ compile:
 
 sythesis:
 	@echo ; echo
-	@echo "[✔️] Now add the verilog and tcl files under \`build/logic101/LAB$(LAB)\` to your vivado project"
+	@echo "[✔️] Now add the verilog and tcl files under \`$(CHISEL_OUT)/LAB$(LAB)\` to your vivado project"
 
 clean:
 	rm -rf build target project/target *.v *.anno.json
