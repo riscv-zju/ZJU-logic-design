@@ -4,10 +4,10 @@ SCRIPT		:= $(TOP)/scripts
 CHISEL_OUT	:= $(BUILD)/logic101
 VIVADO_OUT	:= $(BUILD)/vivado
 
-LAB 		?= 13
+LAB 		?= 14
 TOP_MODULE	?= NexysA7FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
-CONFIG		?= SEGTarget
+CONFIG		?= ClockTarget
 
 all: compile sythesis
 

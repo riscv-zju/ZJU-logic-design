@@ -21,7 +21,7 @@ We will provide synthesis scripts in the future.
 
 
 ## How to Simulation
-Chisel test is not a best choice, I recommend you use iverilog, vivado and other EDA to simulate your design.
+Using chisel-test is not a good choice, I recommend you use [iverilog](https://command-not-found.com/iverilog), vivado and other EDA(e.g. synopsys vcs) to simulate your design.
 We will provide testbench in the future.
 
 
