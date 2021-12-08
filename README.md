@@ -40,7 +40,7 @@ In vivado IDE, select `Flow - Open Hardware Manager` to load bit file under `bui
 
 ## How to Simulation
 Using chisel-test is not a good choice, I recommend you use [iverilog](https://command-not-found.com/iverilog), vivado and other EDA (e.g. synopsys vcs) to simulate your design.
-We will provide testbench in the future.
+You can use testbench in the slides.
 
 
 ## *In the End*
