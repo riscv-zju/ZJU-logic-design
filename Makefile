@@ -1,29 +1,45 @@
 TOP			:= $(CURDIR)
 BUILD		:= $(TOP)/build
 SCRIPT		:= $(TOP)/scripts
-CHISEL_OUT	:= $(BUILD)/logic101
-VIVADO_OUT	:= $(BUILD)/vivado
 
 LAB 		?= 0
 TOP_MODULE	?= NexysA7FPGAWrapper
 PACKAGE		?= logic101.lab._$(LAB)
 CONFIG		?= EmptyTarget
+BOARD		?= xc7a100tcsg324-1
 
-all: compile sythesis
+CHISEL_OUT	:= $(BUILD)/logic101/lab$(LAB).$(CONFIG)
+VIVADO_OUT	:= $(BUILD)/vivado/lab$(LAB).$(CONFIG)
+CHECKPOINT	:= $(VIVADO_OUT)/post_route.dcp
+
+export SCRIPT CHISEL_OUT VIVADO_OUT
+
+all: compile
 
 compile_help:
 	sbt "runMain logic101.system.Generator --help"
 
 compile:
-	mkdir -p $(CHISEL_OUT)/LAB$(LAB)
+	mkdir -p $(CHISEL_OUT)
 	sbt "runMain logic101.system.Generator \
 			-T logic101.fpga.$(TOP_MODULE) \
 			-C $(PACKAGE).$(CONFIG) 	\
-			-td $(CHISEL_OUT)/LAB$(LAB)"
-
-sythesis:
+			-td $(CHISEL_OUT)"
 	@echo ; echo
-	@echo "[✔️] Now add the verilog and tcl files under \`$(CHISEL_OUT)/LAB$(LAB)\` to your vivado project"
+	@echo "[✔️] Now add the verilog and tcl files under \`$(CHISEL_OUT)\` to your vivado project"
+
+synthesis:
+	mkdir -p $(VIVADO_OUT)
+	cd $(VIVADO_OUT); vivado -mode batch -nojournal -source $(SCRIPT)/vivado/main.tcl \
+									   -tclargs -top-module $(TOP_MODULE) -board $(BOARD)
+
+
+$(CHECKPOINT): synthesis
+
+fpga: $(CHECKPOINT)
+	mkdir -p $(VIVADO_OUT)
+	cd $(VIVADO_OUT); vivado -mode batch -nojournal -source $(SCRIPT)/vivado/fpga.tcl $(CHECKPOINT)
+
 
 clean:
 	rm -rf build target project/target *.v *.anno.json
