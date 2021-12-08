@@ -25,8 +25,6 @@ compile:
 			-T logic101.fpga.$(TOP_MODULE) \
 			-C $(PACKAGE).$(CONFIG) 	\
 			-td $(CHISEL_OUT)"
-	@echo ; echo
-	@echo "[✔️] Now add the verilog and tcl files under \`$(CHISEL_OUT)\` to your vivado project"
 
 synthesis:
 	mkdir -p $(VIVADO_OUT)
