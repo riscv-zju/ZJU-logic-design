@@ -6,7 +6,7 @@ This repository contains a chisel version of the laboratory of the Zhejiang Univ
 **Notice**: The board used here is [Nexys A7](https://digilent.com/reference/programmable-logic/nexys-a7/start), not the [SWORD](https://digilent.com/reference/programmable-logic/sword/start) board used in the class.
 
 ## How to Compile
-Currently, we only support compile process, which converts chisel to verilog.
+Currently, we support compile (chisel -> verilog) and sythesis (verilog -> bit) process.
 To compile the code, you need install sbt from [here](https://www.scala-sbt.org/1.x/docs/Setup.html).
 
 You can select your target lab and task by using `LAB` and `CONFIG` variables.
