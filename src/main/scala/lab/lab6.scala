@@ -80,7 +80,7 @@ class DispNumberIO extends Bundle {
   val AN = Output(Vec(4, Bool()))
 }
 
-class DispNumber(implicit p: Parameters) extends Module {
+class DispNumber(implicit p: Parameters) extends TopModule {
   val io = IO(new DispNumberIO)
 
   val my_mc14495 = Module(new MC14495)

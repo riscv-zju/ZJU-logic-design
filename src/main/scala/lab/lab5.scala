@@ -59,7 +59,7 @@ class D_74LS138 extends Module {
   }
 }
 
-class DecodeTest(implicit p: Parameters) extends Module {
+class DecodeTest(implicit p: Parameters) extends TopModule {
   val io = IO(new DecodeTestIO)
 
   val decode = Module(new D_74LS138)
@@ -70,7 +70,7 @@ class DecodeTest(implicit p: Parameters) extends Module {
   io.LED := decode.io.out.asTypeOf(io.LED)
 }
 
-class LampCtrl(implicit p: Parameters) extends Module {
+class LampCtrl(implicit p: Parameters) extends TopModule {
   /* F = S1~S2~S3 + ~S1S2~S3 + ~S1~S2S3 + S1S2S3 */
   val io = IO(new DecodeTestIO)
   io := DontCare

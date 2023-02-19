@@ -69,7 +69,7 @@ class cnt4bTopIO extends Bundle {
   val LED = Output(Bool())
 }
 
-class cnt4bTop(implicit p: Parameters) extends Module {
+class cnt4bTop(implicit p: Parameters) extends TopModule {
   val io = IO(new cnt4bTopIO)
 
   val div = Module(new clkdiv(50000000))
@@ -111,7 +111,7 @@ class cnt16bTopIO extends Bundle {
   val LED = Output(Bool())
 }
 
-class cnt16bTop(implicit p: Parameters) extends Module {
+class cnt16bTop(implicit p: Parameters) extends TopModule {
   val io = IO(new cnt16bTopIO)
 
   val div = Module(new clkdiv(5000000))

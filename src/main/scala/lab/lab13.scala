@@ -137,7 +137,7 @@ class LEDTopIO extends Bundle {
   val LED = Output(Vec(16, Bool()))
 }
 
-class LEDTop(implicit p: Parameters) extends Module {
+class LEDTop(implicit p: Parameters) extends TopModule {
   val io = IO(new LEDTopIO)
 
   val div = Module(new logic101.lab._11.clkdiv(50000))
@@ -219,7 +219,7 @@ class SEGTopIO extends Bundle {
   val AN = Output(Vec(8, Bool()))
 }
 
-class SEGTop(implicit p: Parameters) extends Module {
+class SEGTop(implicit p: Parameters) extends TopModule {
   val io = IO(new SEGTopIO)
 
   val div = Module(new logic101.lab._11.clkdiv(500000))

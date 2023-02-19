@@ -77,7 +77,7 @@ class TopIO extends Bundle {
   val AN = Output(Vec(4, Bool()))
 }
 
-class Task1Top(implicit p: Parameters) extends Module {
+class Task1Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
   val a = Module(new RegControl(4, true))
@@ -95,7 +95,7 @@ class Task1Top(implicit p: Parameters) extends Module {
   io.AN := display.io.AN.asTypeOf(io.AN)
 }
 
-class Task2Top(implicit p: Parameters) extends Module {
+class Task2Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
   val tri_select = Wire(UInt(4.W))
@@ -134,7 +134,7 @@ class Task2Top(implicit p: Parameters) extends Module {
 }
 
 
-class Task3Top(implicit p: Parameters) extends Module {
+class Task3Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
   val tri_select = Wire(UInt(4.W))

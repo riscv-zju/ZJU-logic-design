@@ -1,4 +1,5 @@
 ![logo](./img/logic101.png)
+
 Digital Logic Design 101 [Chisel Version]
 =======================
 This repository contains a chisel version of the laboratory of the Zhejiang University Logic and Computer Design Fundamentals course.
@@ -41,20 +42,3 @@ In vivado IDE, select `Flow - Open Hardware Manager` to load bit file under `bui
 ## How to Simulation
 Using chisel-test is not a good choice, I recommend you use [iverilog](https://command-not-found.com/iverilog), vivado and other EDA (e.g. synopsys vcs) to simulate your design.
 You can use testbench in the slides.
-
-
-## *In the End*
-Using chisel to complete labs will lose some gate-level details, and I do not recommend you use the content of this repository directly, so I do not provide a submittable implementation (although porting to the SWORD board is easy).
-
-I hope these examples will help you get started with chisel. 
-
-For **students** interested in computer architecture **in the class**, feel free to contact me.
-
-<p align="center">
-  <img width="200" src="./img/1.0.jpg">
-</p>
-
-<p align="right">
-  phantom <br>
-  2021.12.5
-</p>

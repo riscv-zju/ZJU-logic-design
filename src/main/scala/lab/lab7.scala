@@ -75,7 +75,7 @@ class TopIO extends Bundle {
   val AN = Output(Vec(4, Bool()))
 }
 
-class Top(implicit p: Parameters) extends Module {
+class Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
   val a = io.BTN(3)

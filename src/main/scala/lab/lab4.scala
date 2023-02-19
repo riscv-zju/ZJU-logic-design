@@ -28,7 +28,7 @@ class LampCtrlIO extends Bundle {
     val F  = Output(Bool())
 }
 
-class LampCtrl(implicit p: Parameters) extends Module {
+class LampCtrl(implicit p: Parameters) extends TopModule {
   /* F = S1~S2~S3 + ~S1S2~S3 + ~S1~S2S3 + S1S2S3 */
   val io = IO(new LampCtrlIO)
 
@@ -39,7 +39,7 @@ class LampCtrl(implicit p: Parameters) extends Module {
 }
 
 
-class LampCtrlDelay(implicit p: Parameters) extends Module {
+class LampCtrlDelay(implicit p: Parameters) extends TopModule {
   /* F = S1~S2~S3 + ~S1S2~S3 + ~S1~S2S3 + S1S2S3 */
   val io = IO(new LampCtrlIO)
   val w = Wire(Bool())

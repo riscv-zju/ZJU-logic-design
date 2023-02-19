@@ -27,7 +27,7 @@ class TopIO extends Bundle {
   val AN = Output(Vec(8, Bool()))
 }
 
-class Top(implicit p: Parameters) extends Module {
+class Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
   val seg_div = Module(new logic101.lab._11.clkdiv(50000))

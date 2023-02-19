@@ -8,7 +8,6 @@ import logic101.lab._
 import logic101.system.stage._
 import logic101.system.config._
 
-
 class NexysA7FPGAWrapper(implicit p: Parameters) extends NexysShell {
 
   val dut = withClockAndReset(clk, !rstn) { Module(p(TargetKey)(p)) }
