@@ -16,4 +16,20 @@ jobs:
       - name: Cache Scala
         uses: coursier/cache-action@v5
       - name: SBT Test
-        run: sbt test
+        run: |
+          sbt test
+          make
+          make LAB=4 CONFIG=LampCtrlTarget
+          make LAB=5 CONFIG=DecodeTestTarget
+          make LAB=5 CONFIG=LampCtrlTarget
+          make LAB=6 CONFIG=DecodeTestTarget
+          make LAB=7 CONFIG=TopTarget
+          make LAB=8 CONFIG=TopTarget
+          make LAB=11 CONFIG=cnt4bTarget
+          make LAB=11 CONFIG=cnt16bTarget
+          make LAB=12 CONFIG=Task1Target
+          make LAB=12 CONFIG=Task2Target
+          make LAB=12 CONFIG=Task3Target
+          make LAB=13 CONFIG=LEDTarget
+          make LAB=13 CONFIG=SEGTarget
+          make LAB=14 CONFIG=ClockTarget
