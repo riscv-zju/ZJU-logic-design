@@ -1,15 +1,11 @@
-package logic101.lab._14
+package logic101.lab.digit._14
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
-
-import scala.math.pow
-import org.json4s.scalap.scalasig.PolyTypeWithCons
-
 
 class ClockTarget extends Config((site, here, up) => {
   case TargetKey => (p: Parameters) => new Top()(p)
@@ -93,7 +89,7 @@ class ClockGen extends Module {
 
   val num = Wire((Vec(8, UInt(4.W))))
   val seg_reg = RegInit((VecInit(Seq.fill(8)(0.U(8.W)))))
-  val decode = Seq.fill(8)(Module(new logic101.lab._6.MC14495))
+  val decode = Seq.fill(8)(Module(new MC14495))
   for (i <- 0 until 8) {
     num(i) := 0.U
     decode(i).io.data := num(i)
@@ -125,11 +121,11 @@ class TopIO extends Bundle {
 class Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
-  val clock_clk = Module(new logic101.lab._11.clkdiv(5000000))
+  val clock_clk = Module(new clkdiv(5000000))
   val num = withClock(clock_clk.io.clk) { Module(new ClockGen) }
 
-  val seg_div = Module(new logic101.lab._11.clkdiv(50000))
-  val display = withClock(seg_div.io.clk) { Module(new logic101.lab._13.SEGDisplay) }
+  val seg_div = Module(new clkdiv(50000))
+  val display = withClock(seg_div.io.clk) { Module(new SEGDisplay) }
   display.io.data := num.io.data
   io.SEG := display.io.SEG
   io.AN := display.io.AN

@@ -1,14 +1,11 @@
-package logic101.lab._13
+package logic101.lab.digit._13
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
-
-import scala.math.pow
-
 
 class LEDTarget extends Config((site, here, up) => {
   case TargetKey => (p: Parameters) => new LEDTop()(p)
@@ -46,7 +43,7 @@ class LEDGenNum extends Module {
     val data = Output(UInt(16.W))
   })
 
-  val db = Seq.fill(4)(withClock(io.clk_1ms) { Module(new logic101.lab._8.DeBounce) })
+  val db = Seq.fill(4)(withClock(io.clk_1ms) { Module(new DeBounce) })
   db(0).io.btn := io.ctrl(0)
   db(1).io.btn := io.ctrl(1)
   db(2).io.btn := io.ctrl(2)
@@ -140,8 +137,8 @@ class LEDTopIO extends Bundle {
 class LEDTop(implicit p: Parameters) extends TopModule {
   val io = IO(new LEDTopIO)
 
-  val div = Module(new logic101.lab._11.clkdiv(50000))
-  val db = withClock(div.io.clk) { Module(new logic101.lab._8.DeBounce) }
+  val div = Module(new clkdiv(50000))
+  val db = withClock(div.io.clk) { Module(new DeBounce) }
   db.io.btn := io.SW
 
   val num = Module(new LEDGenNum)
@@ -155,7 +152,7 @@ class LEDTop(implicit p: Parameters) extends TopModule {
   val fake = withClock(drv.io.drv_clk){ Module(new S2P(16)) }
   fake.io.in := ~drv.io.drv_do
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := num.io.data
   display.io.points := "b0000".U
   display.io.LES := "b1111".U
@@ -176,7 +173,7 @@ class SEGGenNum extends Module {
   val num_reg = RegInit((VecInit(Seq.fill(8)(0.U(4.W)))))
   val seg_reg = RegInit((VecInit(Seq.fill(8)(0.U(8.W)))))
   val sw_pos = Wire(Vec(8, Bool()))
-  val decode = Seq.fill(8)(Module(new logic101.lab._6.MC14495))
+  val decode = Seq.fill(8)(Module(new MC14495))
   for (i <- 0 until 8) {
     sw_pos(i) := !RegNext(io.ctrl(i)) && io.ctrl(i)
     when (sw_pos(i)) {
@@ -191,28 +188,6 @@ class SEGGenNum extends Module {
   io.data := seg_reg.asUInt
 }
 
-class SEGDisplay extends Module {
-  val io = IO(new Bundle{
-    val data = Input(UInt(64.W))
-    val SEG = Output(Vec(8, Bool()))
-    val AN = Output(Vec(8, Bool()))
-  })
-
-  val cnt = RegInit(0.U(3.W))
-  cnt := cnt + 1.U
-  io.AN := (~UIntToOH(cnt)).asTypeOf(io.AN)
-  io.SEG := PriorityMux(Seq(
-    UIntToOH(cnt)(0) -> io.data(7, 0),
-    UIntToOH(cnt)(1) -> io.data(15, 8),
-    UIntToOH(cnt)(2) -> io.data(23, 16),
-    UIntToOH(cnt)(3) -> io.data(31, 24),
-    UIntToOH(cnt)(4) -> io.data(39, 32),
-    UIntToOH(cnt)(5) -> io.data(47, 40),
-    UIntToOH(cnt)(6) -> io.data(55, 48),
-    UIntToOH(cnt)(7) -> io.data(63, 56))
-  ).asTypeOf(io.SEG)
-}
-
 class SEGTopIO extends Bundle {
   val SW = Input(Vec(8, Bool()))
   val SEG = Output(Vec(8, Bool()))
@@ -222,8 +197,8 @@ class SEGTopIO extends Bundle {
 class SEGTop(implicit p: Parameters) extends TopModule {
   val io = IO(new SEGTopIO)
 
-  val div = Module(new logic101.lab._11.clkdiv(500000))
-  val db = Seq.fill(8)(withClock(div.io.clk) { Module(new logic101.lab._8.DeBounce) })
+  val div = Module(new clkdiv(500000))
+  val db = Seq.fill(8)(withClock(div.io.clk) { Module(new DeBounce) })
   val sw = Wire(Vec(8, Bool()))
   for (i <- 0 until 8) {
     db(i).io.btn := io.SW(i)
@@ -244,7 +219,7 @@ class SEGTop(implicit p: Parameters) extends TopModule {
   val fake = withClock(drv.io.drv_clk) { Module(new S2P(64)) }
   fake.io.in := drv.io.drv_do
 
-  val seg_div = Module(new logic101.lab._11.clkdiv(50000))
+  val seg_div = Module(new clkdiv(50000))
   val display = withClock(seg_div.io.clk) { Module(new SEGDisplay) }
   display.io.data := fake.io.out
   io.SEG := display.io.SEG

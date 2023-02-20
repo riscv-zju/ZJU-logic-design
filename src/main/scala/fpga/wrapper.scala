@@ -4,7 +4,6 @@ import chisel3._
 import chisel3.util._
 import chisel3.experimental.{DataMirror,IO}
 
-import logic101.lab._
 import logic101.system.stage._
 import logic101.system.config._
 

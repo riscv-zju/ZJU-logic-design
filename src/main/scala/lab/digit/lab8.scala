@@ -1,9 +1,9 @@
-package logic101.lab._8
+package logic101.lab.digit._8
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
 
@@ -102,16 +102,6 @@ class MyALU(n: Int) extends Module {
   }
 }
 
-class DeBounce extends Module {
-  val io = IO(new Bundle{
-    val btn = Input(Bool())
-    val dbtn = Output(Bool())
-  })
-  val pbshift = RegInit(0.U(8.W))
-  pbshift := Cat(pbshift, io.btn)
-  io.dbtn := pbshift.andR
-}
-
 class CreateNumber extends Module {
   val io = IO(new Bundle{
     val btn = Input(Vec(2, Bool()))
@@ -168,7 +158,7 @@ class Top(implicit p: Parameters) extends TopModule {
   alu.io.B := gen_num.io.num(3, 0)
   alu.io.S := Cat(io.SW(3), io.SW(2))
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := Cat(gen_num.io.num(7, 4), gen_num.io.num(3, 0), Cat(0.U(3.W), alu.io.Co), alu.io.C)
   display.io.points := "b0000".U
   display.io.LES := "b1111".U

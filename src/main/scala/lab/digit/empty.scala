@@ -1,15 +1,11 @@
-package logic101.lab._0
+package logic101.lab.digit._0
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
-
-import scala.math.pow
-import org.json4s.scalap.scalasig.PolyTypeWithCons
-
 
 class EmptyTarget extends Config((site, here, up) => {
   case TargetKey => (p: Parameters) => new Top()(p)
@@ -30,8 +26,8 @@ class TopIO extends Bundle {
 class Top(implicit p: Parameters) extends TopModule {
   val io = IO(new TopIO)
 
-  val seg_div = Module(new logic101.lab._11.clkdiv(50000))
-  val display = withClock(seg_div.io.clk) { Module(new logic101.lab._13.SEGDisplay) }
+  val seg_div = Module(new clkdiv(50000))
+  val display = withClock(seg_div.io.clk) { Module(new SEGDisplay) }
   display.io.data := "b11100011_00000011_01000001_10011111_01100011_10011111_00000011_10011111".U
   io.SEG := display.io.SEG
   io.AN := display.io.AN

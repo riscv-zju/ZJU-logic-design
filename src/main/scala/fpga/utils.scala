@@ -1,4 +1,4 @@
-package logic101.lab
+package logic101.fpga
 
 import chisel3._
 import chisel3.util._

@@ -1,9 +1,9 @@
-package logic101.lab._11
+package logic101.lab.digit._11
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
 
@@ -29,23 +29,6 @@ class cnt16bTarget extends Config((site, here, up) => {
           (AN(0), dut.AN(0)), (AN(1), dut.AN(1)), (AN(2), dut.AN(2)), (AN(3), dut.AN(3)), 
     ) }
 })
-
-class clkdiv(n: BigInt) extends Module {
-  val io = IO(new Bundle{
-    val clk = Output(Clock())
-  })
-
-  val cnt = RegInit(0.U(log2Ceil(n).W))
-  val out = RegInit(false.B)
-  io.clk := out.asClock
-
-  when(cnt < n.U) {
-    cnt := cnt + 1.U
-  } .otherwise {
-    cnt := 0.U
-    out := ~out
-  }
-}
 
 class counter4b extends Module {
   val io = IO(new Bundle{
@@ -76,7 +59,7 @@ class cnt4bTop(implicit p: Parameters) extends TopModule {
   val cnt = withClock(div.io.clk) { Module(new counter4b) }
   io.LED := cnt.io.Rc
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := Cat(0.U(12.W), cnt.io.Q)
   display.io.points := "b0000".U
   display.io.LES := "b0001".U
@@ -119,7 +102,7 @@ class cnt16bTop(implicit p: Parameters) extends TopModule {
   cnt.io.S := io.SW
   io.LED := cnt.io.Rc
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := cnt.io.Q
   display.io.points := "b0000".U
   display.io.LES := "b1111".U

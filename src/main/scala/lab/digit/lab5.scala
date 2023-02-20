@@ -1,8 +1,7 @@
-package logic101.lab._5
+package logic101.lab.digit._5
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
 import logic101.system.stage._
 import logic101.system.config._

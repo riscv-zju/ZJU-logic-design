@@ -4,7 +4,8 @@ SCRIPT		:= $(TOP)/scripts
 
 LAB 		?= 0
 TOP_MODULE	?= NexysA7FPGAWrapper
-PACKAGE		?= logic101.lab._$(LAB)
+COURSE		?= digit
+PACKAGE		?= logic101.lab.$(COURSE)._$(LAB)
 CONFIG		?= EmptyTarget
 BOARD		?= xc7a100tcsg324-1
 

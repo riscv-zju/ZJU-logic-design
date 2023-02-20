@@ -1,9 +1,9 @@
-package logic101.lab._12
+package logic101.lab.digit._12
 
 import chisel3._
 import chisel3.util._
-import logic101.lab._
 import logic101.fpga._
+import logic101.lab.common._
 import logic101.system.stage._
 import logic101.system.config._
 
@@ -45,13 +45,13 @@ class RegControl(n: Int, selfgen: Boolean) extends Module {
   })
 
   val reg = RegInit(0.U(n.W))
-  val div = Module(new logic101.lab._11.clkdiv(50000))
-  val db = withClock(div.io.clk) { Module(new logic101.lab._8.DeBounce) }
+  val div = Module(new clkdiv(50000))
+  val db = withClock(div.io.clk) { Module(new DeBounce) }
   db.io.btn := io.btn
   val load = !RegNext(db.io.dbtn) && db.io.dbtn
 
   val adder_out = if (selfgen) {
-    val m = Module(new logic101.lab._8.Adder(4))
+    val m = Module(new logic101.lab.digit._8.Adder(4))
     m.io.A := reg
     m.io.B := 1.U
     m.io.Ctrl := io.direct.get
@@ -86,7 +86,7 @@ class Task1Top(implicit p: Parameters) extends TopModule {
   a.io.direct.get := io.SW(0)
   a.io.in1 := 0.U
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := Cat(0.U(12.W), a.io.out)
   display.io.points := "b0000".U
   display.io.LES := "b0001".U
@@ -124,7 +124,7 @@ class Task2Top(implicit p: Parameters) extends TopModule {
     is ("b11".U) { tri_select := c.io.out }
   } 
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := Cat(a.io.out, b.io.out, c.io.out, 0.U(4.W))
   display.io.points := "b0000".U
   display.io.LES := "b1110".U
@@ -150,7 +150,7 @@ class Task3Top(implicit p: Parameters) extends TopModule {
   b.io.direct.get := io.SW(1)
   b.io.in1 := tri_select
 
-  val alu = Module(new logic101.lab._8.MyALU(4))
+  val alu = Module(new logic101.lab.digit._8.MyALU(4))
   alu.io.A := a.io.out
   alu.io.B := b.io.out
   alu.io.S := Cat(io.SW(3), io.SW(2))
@@ -168,7 +168,7 @@ class Task3Top(implicit p: Parameters) extends TopModule {
     is ("b11".U) { tri_select := c.io.out }
   } 
 
-  val display = Module(new logic101.lab._7.DispNum)
+  val display = Module(new DispNum)
   display.io.hexs := Cat(a.io.out, b.io.out, c.io.out, alu.io.C)
   display.io.points := "b0000".U
   display.io.LES := "b1111".U
