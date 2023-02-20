@@ -9,8 +9,8 @@ PACKAGE		?= logic101.lab.$(COURSE)._$(LAB)
 CONFIG		?= EmptyTarget
 BOARD		?= xc7a100tcsg324-1
 
-CHISEL_OUT	:= $(BUILD)/logic101/lab$(LAB).$(CONFIG)
-VIVADO_OUT	:= $(BUILD)/vivado/lab$(LAB).$(CONFIG)
+CHISEL_OUT	:= $(BUILD)/logic101/$(COURSE)/lab$(LAB).$(CONFIG)
+VIVADO_OUT	:= $(BUILD)/vivado/$(COURSE)/lab$(LAB).$(CONFIG)
 CHECKPOINT	:= $(VIVADO_OUT)/post_route.dcp
 
 export SCRIPT CHISEL_OUT VIVADO_OUT
